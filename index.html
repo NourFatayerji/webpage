@@ -125,7 +125,7 @@
                 mode: 'cors',
                 body: JSON.stringify({name: name, email: email, username: username}),
                 headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": "text/plain;charset=utf-8",
                 },
             })
             .then(response => response.json())
