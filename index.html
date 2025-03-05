@@ -108,9 +108,7 @@
 
         <p><strong>Step 3:</strong> Submit your username by clicking the button below:</p>
         
-        <!-- <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=CDJzroOHk0uUpcXyn7cfqXaCC7q1KbJOkRRUqUxSNERUOE9DSVFaUVFXTkgzSkhXR0JMRlZBSE5RVi4u" target="_blank"> -->
-            <button class="submit-btn" onclick="submitDetails()">Submit</button>
-        <!-- </a> -->
+        <button class="submit-btn" onclick="submitDetails()">Submit</button>
 
         <p class="footer">This website is for LCPC students registering on Codeforces.</p>
     </div>
@@ -122,24 +120,30 @@
             const username = document.getElementById('username').value;
     
             fetch('https://script.google.com/macros/s/AKfycbzkU1U46GKlRZnsartiGj26PHxOD7TScjEQsklxf0tuTcy_juxi0sVnsbc4kEOedDYVNw/exec', {
+                redirect: "follow",
                 method: 'POST',
                 mode: 'cors',
+                body: JSON.stringify({name: name, email: email, username: username}),
                 headers: {
-                    'Content-Type': 'application/json',
+                    "Content-Type": "text/plain;charset=utf-8",
                 },
-                body: JSON.stringify({name: name, email: email, username: username})
             })
             .then(response => response.json())
-            .then(data => alert('Data submitted successfully!'))
+            .then(data => {
+                if (data.status === "success") {
+                    alert('Data submitted successfully!');
+                } else {
+                    alert('Submission failed');
+                }
+            })
             .catch((error) => {
                 console.error('Error:', error);
+                alert('Failed to submit data. Please try again.');
             });
-    
-            // Prevent default form action
+        
             return false;
         }
     </script>
     
-
 </body>
 </html>
