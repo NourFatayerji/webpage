@@ -125,7 +125,7 @@
                 mode: 'cors',
                 body: JSON.stringify({name: name, email: email, username: username}),
                 headers: {
-                    "Content-Type": "text/plain;charset=utf-8",
+                    "Content-Type": "application/json",
                 },
             })
             .then(response => response.json())
@@ -133,12 +133,12 @@
                 if (data.status === "success") {
                     alert(data.message);
                 } else {
-                    alert(data.message);
+                    throw new Error(data.message);
                 }
             })
             .catch((error) => {
                 console.error('Error:', error);
-                alert('Network error or unable to reach server.');
+                alert(error.message || 'Network error or unable to reach server.');
             });
         
             return false;
